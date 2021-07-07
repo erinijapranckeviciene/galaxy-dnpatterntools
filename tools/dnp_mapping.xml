@@ -1,0 +1,75 @@
+<tool id="dnp_mapping" name="Mapping nucleosome position" version="0.1.0">
+    <requirements>
+        <requirement type="package" version="1.0">dnp-mapping</requirement>
+    </requirements>
+    <command detect_errors="exit_code" interpreter="bash"><![CDATA[
+        dnp-mapping.sh '$input1' '$input2' '$input3' '$input4' '$output1' '$output2'
+    ]]></command>
+    <inputs>
+      <param type="data" name="input1" format="tabular" label="Tabular fasta" />
+      <param type="data" name="input2" format="tabular" label="Patterns matrix" />
+      <param name="input3" type="integer" value="0" label="Trim from start of sequences" />
+      <param name="input4" type="integer" value="400" label="Sequence length" />
+    </inputs>
+    <outputs>
+        <data name="output1" format="tabular" />
+        <data name="output2" format="tabular" />
+    </outputs>
+    <tests>
+        <test>
+            <param name="input1" value="601"/>
+            <param name="input2" value="class1_mtr"/>
+            <param name="input3" value="0"/>
+            <param name="input4" value="400"/>
+            <output name="output1" file="cf"/>
+            <output name="output2" file="pos"/>
+        </test>
+    </tests>
+    <help><![CDATA[
+
+Description::
+
+
+   Maps nucleosome position in sequence given a pattern 
+   of dinucleotide frequencies along the sequence by 
+   computing a correlation between the sequence and the pattern.
+
+   Pattern matrix should contain a header line identifying 
+   dinucleotides of which the pattern is. Trim from start
+   number tells how many positions to trim from the start 
+   of the sequence (default 0). Sequence length is how many 
+   positions in sequence to retain after trimming 
+   (default the rest of the sequence).   
+
+
+Example::
+
+   Input tabular fasta:
+	Widom601Seq     CGGGATCCTAATGACCAAGGAAAGCATGATTCTTCA...
+
+   Input pattern matrix file:
+      	YY CC
+	0.285353 0.056062
+	0.281269 0.055327
+	0.280065 0.054823
+      
+   
+   Output tabular position file:
+	Widom601Seq     test-data/class6_mtr    153 0.140767
+
+    ]]></help>
+    <citations>
+        <citation type="bibtex">
+@article{ioshikhes2011,
+  title={Variety of genomic DNA patterns for nucleosome positioning},
+  author={Ioshikhes, Ilya  and Hosid, Sergey and Pugh Franklin},
+  journal={Genome Research},
+  volume={21},
+  number={11},
+  pages={1863-1871},
+  year={2011},
+  publisher={CSH Press},
+  url = {https://genome.cshlp.org/content/21/11/1863.full}
+}</citation>
+    </citations>
+</tool>
