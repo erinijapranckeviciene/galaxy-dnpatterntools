@@ -53,6 +53,12 @@ tools:
   tool_panel_section_label: 'Dnpatterntools'
   install_resolver_dependencies: True
 
+- name: 'dnp_mapping'
+  owner: erinija
+  tool_shed_url: https://testtoolshed.g2.bx.psu.edu
+  tool_panel_section_label: 'Dnpatterntools'
+  install_resolver_dependencies: True
+
 - name: 'charts'
   owner: iuc
   tool_shed_url: https://toolshed.g2.bx.psu.edu
